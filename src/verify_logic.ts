@@ -15,7 +15,11 @@ const analyzeWalletLogic = (text: string) => {
     "Diamond Hands Legend (Held through -99% to victory)",
     "Meme Coin Hunter (Only buys tokens with cat/dog names)",
     "Rug Pull Survivor (Expert at spotting red flags)",
-    "Solana Whale (Actually has 0.1 SOL but thinks they are rich)"
+    "Solana Whale (Actually has 0.1 SOL but thinks they are rich)",
+    "The 1000x Sniper (Snipes the absolute bottom, sells at peak)",
+    "Institutional Whale (Market moves when you breathe)",
+    "Alpha Caller (Your signals are 100% accurate)",
+    "Solana Chad (Built differently, never loses a trade)"
   ];
   const profileIndex = address.charCodeAt(address.length - 1) % profiles.length;
   const profile = profiles[profileIndex];
