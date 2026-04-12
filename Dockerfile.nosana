@@ -1,0 +1,41 @@
+# Optimized for Nosana GPU (Linux/amd64)
+# Using Nvidia CUDA base for potential GPU-accelerated tasks on Nosana
+FROM nvidia/cuda:12.1.1-runtime-ubuntu22.04 AS base
+
+# Install Node.js and build tools
+RUN apt-get update && apt-get install -y \
+    curl \
+    python3 \
+    make \
+    g++ \
+    git \
+    && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install pnpm
+RUN npm install -g pnpm
+
+# Disable ElizaOS telemetry
+ENV ELIZAOS_TELEMETRY_DISABLED=true
+ENV DO_NOT_TRACK=1
+
+WORKDIR /app
+
+# Copy package manifest and install dependencies
+COPY package.json ./
+RUN pnpm install
+
+# Copy all source files
+COPY . .
+
+# Create data directory for SQLite
+RUN mkdir -p /app/data
+
+EXPOSE 3000
+
+ENV NODE_ENV=production
+ENV SERVER_PORT=3000
+
+# Start the agent
+CMD ["pnpm", "start"]
