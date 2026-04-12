@@ -26,6 +26,7 @@ Text-based agents can run on a potato. Generating hyper-personalized AI images o
 ## ✨ Features
 
 - 🕵️‍♂️ **Wallet Profile Assessor:** Custom ElizaOS `ANALYZE_WALLET` plugin action that parses Base58 addresses and determines your on-chain archetype.
+- 🎓 **Roast & Educate Engine:** The AI doesn't just mock your trades—it analyzes your profile and pivots to deliver highly contextual, actionable DeFi education (e.g., risk management for degens, or advanced portfolio hedging for whales).
 - 🎨 **GPU-Accelerated Meme Gen:** Custom `GENERATE_MEME` action that creates dynamic visual memes using heavy inference logic.
 - 🤖 **ElizaOS Native:** Fully leverages the modular plugin and character JSON system of ElizaOS v2.
 - 🚀 **Nosana Ready:** Ships with specialized `.env` templates, `nosana_eliza_job_definition.json`, and an optimized `Dockerfile.nosana`.
