@@ -7,7 +7,7 @@
     "wallet-fortune-meme-plugin"
   ],
   "settings": {
-    "model": "Qwen3.5-27B-AWQ-4bit",
+    "model": "Qwen3.5-9B-FP8",
     "modelProvider": "openai",
     "secrets": {}
   },
