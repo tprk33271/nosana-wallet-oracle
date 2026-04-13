@@ -1,20 +1,15 @@
-# Optimized for Nosana GPU (Linux/amd64)
-# Using Nvidia CUDA base for potential GPU-accelerated tasks on Nosana
-FROM nvidia/cuda:12.1.1-runtime-ubuntu22.04 AS base
+# syntax=docker/dockerfile:1
 
-# Install Node.js and build tools
+# Match official Nosana agent-challenge base image (lightweight, fast pull)
+FROM node:23-slim AS base
+
+# Install system dependencies needed for native modules (e.g. better-sqlite3)
 RUN apt-get update && apt-get install -y \
-    curl \
-    python3 \
-    make \
-    g++ \
-    git \
-    && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
-    && apt-get install -y nodejs \
-    && rm -rf /var/lib/apt/lists/*
-
-# Install pnpm
-RUN npm install -g pnpm
+  python3 \
+  make \
+  g++ \
+  git \
+  && rm -rf /var/lib/apt/lists/*
 
 # Disable ElizaOS telemetry
 ENV ELIZAOS_TELEMETRY_DISABLED=true
@@ -22,12 +17,15 @@ ENV DO_NOT_TRACK=1
 
 WORKDIR /app
 
-# Copy package manifest and setup local plugin resolution
+# Install pnpm
+RUN npm install -g pnpm
+
+# Copy package manifest and local plugin manifest, then install
 COPY package.json ./
 COPY src/package.json ./src/
 RUN pnpm install
 
-# Copy all source files
+# Copy all source files (characters, src, etc.)
 COPY . .
 
 # Create data directory for SQLite
@@ -38,5 +36,4 @@ EXPOSE 3000
 ENV NODE_ENV=production
 ENV SERVER_PORT=3000
 
-# Start the agent
 CMD ["pnpm", "start"]
