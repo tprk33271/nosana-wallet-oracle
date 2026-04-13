@@ -6,14 +6,9 @@ RUN apt-get update && apt-get install -y \
   make \
   g++ \
   git \
-  curl \
-  unzip \
   && rm -rf /var/lib/apt/lists/*
 
-# Install Bun (required by elizaos CLI) - Using npm to avoid GitHub 503 download errors
-RUN npm install -g bun
-
-# Disable ElizaOS telemetry
+# Disable telemetry
 ENV ELIZAOS_TELEMETRY_DISABLED=true
 ENV DO_NOT_TRACK=1
 
@@ -22,9 +17,8 @@ WORKDIR /app
 # Install pnpm
 RUN npm install -g pnpm
 
-# Copy package manifest and local plugin manifest, then install
+# Copy package manifest and install dependencies
 COPY package.json ./
-COPY src/package.json ./src/
 RUN pnpm install
 
 # Copy all source files
@@ -33,21 +27,9 @@ COPY . .
 # Create data directory for SQLite
 RUN mkdir -p /app/data
 
-# Bake .env - point to local nothink proxy instead of direct Qwen endpoint
-RUN echo 'OPENAI_API_KEY=nosana' > /app/.env && \
-    echo 'OPENAI_BASE_URL=http://localhost:5001/v1' >> /app/.env && \
-    echo 'SMALL_OPENAI_MODEL=Qwen3.5-9B-FP8' >> /app/.env && \
-    echo 'LARGE_OPENAI_MODEL=Qwen3.5-9B-FP8' >> /app/.env && \
-    echo 'OPENAI_EMBEDDING_MODEL=Qwen3-Embedding-0.6B' >> /app/.env && \
-    echo 'OPENAI_EMBEDDING_URL=https://4yiccatpyxx773jtewo5ccwhw1s2hezq5pehndb6fcfq.node.k8s.prd.nos.ci/v1' >> /app/.env && \
-    echo 'OPENAI_EMBEDDING_API_KEY=nosana' >> /app/.env && \
-    echo 'SERVER_PORT=3000' >> /app/.env
-
-RUN chmod +x /app/start.sh
-
 EXPOSE 3000
 
 ENV NODE_ENV=production
 ENV SERVER_PORT=3000
 
-CMD ["/bin/sh", "/app/start.sh"]
+CMD ["pnpm", "start"]

@@ -1,23 +1,25 @@
 {
   "version": "0.1",
   "type": "container",
+  "meta": {
+    "trigger": "cli"
+  },
   "ops": [
     {
-      "id": "agent",
       "type": "container/run",
+      "id": "eliza-agent",
       "args": {
         "image": "tp143/nosana-eliza-agent:latest",
         "expose": 3000,
         "env": {
           "OPENAI_API_KEY": "nosana",
-          "OPENAI_BASE_URL": "https://5i8frj7ann99bbw9gzpprvzj2esugg39hxbb4unypskq.node.k8s.prd.nos.ci/v1",
-          "SMALL_OPENAI_MODEL": "Qwen3.5-9B-FP8",
-          "LARGE_OPENAI_MODEL": "Qwen3.5-9B-FP8",
-          "OPENAI_EMBEDDING_MODEL": "Qwen3-Embedding-0.6B",
+          "OPENAI_API_URL": "https://5i8frj7ann99bbw9gzpprvzj2esugg39hxbb4unypskq.node.k8s.prd.nos.ci/v1",
+          "MODEL_NAME": "Qwen3.5-9B-FP8",
           "OPENAI_EMBEDDING_URL": "https://4yiccatpyxx773jtewo5ccwhw1s2hezq5pehndb6fcfq.node.k8s.prd.nos.ci/v1",
           "OPENAI_EMBEDDING_API_KEY": "nosana",
-          "SERVER_PORT": "3000",
-          "NODE_ENV": "production"
+          "OPENAI_EMBEDDING_MODEL": "Qwen3-Embedding-0.6B",
+          "OPENAI_EMBEDDING_DIMENSIONS": "1024",
+          "SERVER_PORT": "3000"
         }
       }
     }
