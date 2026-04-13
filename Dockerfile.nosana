@@ -1,6 +1,5 @@
 # syntax=docker/dockerfile:1
 
-# Match official Nosana agent-challenge base image (lightweight, fast pull)
 FROM node:23-slim AS base
 
 # Install system dependencies needed for native modules (e.g. better-sqlite3)
@@ -9,7 +8,13 @@ RUN apt-get update && apt-get install -y \
   make \
   g++ \
   git \
+  curl \
+  unzip \
   && rm -rf /var/lib/apt/lists/*
+
+# Install bun (required by elizaos CLI)
+RUN curl -fsSL https://bun.sh/install | bash
+ENV PATH="/root/.bun/bin:${PATH}"
 
 # Disable ElizaOS telemetry
 ENV ELIZAOS_TELEMETRY_DISABLED=true
@@ -25,7 +30,7 @@ COPY package.json ./
 COPY src/package.json ./src/
 RUN pnpm install
 
-# Copy all source files (characters, src, etc.)
+# Copy all source files
 COPY . .
 
 # Create data directory for SQLite
