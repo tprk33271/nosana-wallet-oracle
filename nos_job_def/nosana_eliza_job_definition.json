@@ -1,4 +1,8 @@
 {
+  "type": "container",
+  "meta": {
+    "trigger": "cli"
+  },
   "ops": [
     {
       "id": "agent",
