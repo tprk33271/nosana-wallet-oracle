@@ -35,6 +35,16 @@ COPY . .
 # Create data directory for SQLite
 RUN mkdir -p /app/data
 
+# Bake .env with correct ElizaOS v2 variable names
+RUN echo 'OPENAI_API_KEY=nosana' > /app/.env && \
+    echo 'OPENAI_BASE_URL=https://5i8frj7ann99bbw9gzpprvzj2esugg39hxbb4unypskq.node.k8s.prd.nos.ci/v1' >> /app/.env && \
+    echo 'SMALL_OPENAI_MODEL=Qwen3.5-9B-FP8' >> /app/.env && \
+    echo 'LARGE_OPENAI_MODEL=Qwen3.5-9B-FP8' >> /app/.env && \
+    echo 'OPENAI_EMBEDDING_MODEL=Qwen3-Embedding-0.6B' >> /app/.env && \
+    echo 'OPENAI_EMBEDDING_URL=https://4yiccatpyxx773jtewo5ccwhw1s2hezq5pehndb6fcfq.node.k8s.prd.nos.ci/v1' >> /app/.env && \
+    echo 'OPENAI_EMBEDDING_API_KEY=nosana' >> /app/.env && \
+    echo 'SERVER_PORT=3000' >> /app/.env
+
 EXPOSE 3000
 
 ENV NODE_ENV=production
