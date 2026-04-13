@@ -33,9 +33,9 @@ COPY . .
 # Create data directory for SQLite
 RUN mkdir -p /app/data
 
-# Bake .env with correct ElizaOS v2 variable names
+# Bake .env - point to local nothink proxy instead of direct Qwen endpoint
 RUN echo 'OPENAI_API_KEY=nosana' > /app/.env && \
-    echo 'OPENAI_BASE_URL=https://5i8frj7ann99bbw9gzpprvzj2esugg39hxbb4unypskq.node.k8s.prd.nos.ci/v1' >> /app/.env && \
+    echo 'OPENAI_BASE_URL=http://localhost:5001/v1' >> /app/.env && \
     echo 'SMALL_OPENAI_MODEL=Qwen3.5-9B-FP8' >> /app/.env && \
     echo 'LARGE_OPENAI_MODEL=Qwen3.5-9B-FP8' >> /app/.env && \
     echo 'OPENAI_EMBEDDING_MODEL=Qwen3-Embedding-0.6B' >> /app/.env && \
@@ -43,9 +43,11 @@ RUN echo 'OPENAI_API_KEY=nosana' > /app/.env && \
     echo 'OPENAI_EMBEDDING_API_KEY=nosana' >> /app/.env && \
     echo 'SERVER_PORT=3000' >> /app/.env
 
+RUN chmod +x /app/start.sh
+
 EXPOSE 3000
 
 ENV NODE_ENV=production
 ENV SERVER_PORT=3000
 
-CMD ["pnpm", "start"]
+CMD ["/bin/sh", "/app/start.sh"]
