@@ -1,5 +1,3 @@
-# syntax=docker/dockerfile:1
-
 FROM node:23-slim AS base
 
 # Install system dependencies needed for native modules (e.g. better-sqlite3)
