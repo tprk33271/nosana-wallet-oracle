@@ -1,3 +1,5 @@
+# syntax=docker/dockerfile:1
+
 FROM node:23-slim AS base
 
 # Install system dependencies needed for native modules (e.g. better-sqlite3)
@@ -6,7 +8,13 @@ RUN apt-get update && apt-get install -y \
   make \
   g++ \
   git \
+  curl \
+  unzip \
   && rm -rf /var/lib/apt/lists/*
+
+# Install bun (required by @elizaos/cli)
+RUN curl -fsSL https://bun.sh/install | bash
+ENV PATH="/root/.bun/bin:$PATH"
 
 # Disable telemetry
 ENV ELIZAOS_TELEMETRY_DISABLED=true
@@ -31,8 +39,5 @@ EXPOSE 3000
 
 ENV NODE_ENV=production
 ENV SERVER_PORT=3000
-
-# Note: Environment variables like OPENAI_API_URL are provided via the Nosana Job Definition
-# to keep this image clean and reusable.
 
 CMD ["pnpm", "start"]
