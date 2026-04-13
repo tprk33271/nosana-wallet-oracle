@@ -32,4 +32,7 @@ EXPOSE 3000
 ENV NODE_ENV=production
 ENV SERVER_PORT=3000
 
+# Note: Environment variables like OPENAI_API_URL are provided via the Nosana Job Definition
+# to keep this image clean and reusable.
+
 CMD ["pnpm", "start"]

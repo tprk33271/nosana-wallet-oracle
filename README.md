@@ -1,84 +1,83 @@
 <div align="center">
   <img src="./assets/NosanaXEliza.jpg" alt="Nosana x ElizaOS" width="600px"/>
 
-  <h1>🔮 Wallet Fortune & Meme Generator</h1>
+  <h1>🔮 Wallet Oracle: The Degen Counselor</h1>
   
-  <p><strong>The Ultimate Degen Oracle Powered by Decentralized GPUs</strong></p>
+  <p><strong>A Sarcastic AI Roast & Education Agent Powered by Nosana's Decentralized GPU Grid</strong></p>
   
-  <p>An official submission for the <b>Nosana Builders Challenge: ElizaOS</b>.</p>
+  <p>Official submission for the <b>Nosana Builders Challenge: ElizaOS</b>.</p>
 </div>
 
 ---
 
-## ⚡ What is the Wallet Fortune Agent?
+## 📝 Project Description (Submission Summary)
 
-In the wild west of the Solana ecosystem, everyone loves two things: **Meme Coins** and **Getting roasted for bad trades**. 
+The **Wallet Oracle** is an autonomous AI agent built on **ElizaOS v2** and deployed on the **Nosana** decentralized GPU network. 
 
-We built an autonomous AI agent on the **ElizaOS** framework that scans your Solana wallet address, analyzes your trading behavior (e.g., *Paper Hands*, *Rug Pull Survivor*, *Whale*), and delivers a hilarious, personalized fortune reading. But we didn't stop at text.
+In the high-stakes world of the Solana ecosystem, traders often get caught in cycles of FOMO and emotional trading. The Wallet Oracle provides a much-needed "reality check" through a unique **Roast & Educate** workflow. 
 
-By tapping into the decentralized GPU power of the **Nosana Network**, our agent natively hosts an **Audio/Visual Meme Generation Pipeline**. If it detects you bought the top of a meme coin, it dynamically generates a crying animal meme tailored just for you.
+### Core Logic:
+1. **The Roast**: When presented with a wallet or trading history, the Oracle delivers a brutally honest, sarcastic critique of the user's trading archetypes (e.g., *Paper Hands*, *Top-Buyer*, or *Rug-Pull Magnet*).
+2. **The Education**: Once the ego is bruised, the Oracle pivots to serious financial literacy. It provides one piece of high-quality, actionable DeFi advice—ranging from risk management strategies to advanced portfolio hedging techniques—empowering the user to become a smarter participant in the network.
 
-### 🏆 Why Nosana? (Our Unique Value)
-Text-based agents can run on a potato. Generating hyper-personalized AI images on the fly requires serious compute. By containerizing our agent on a `linux/amd64` CUDA stack, we deploy our heavy inference and generation tasks exclusively on Nosana's GPU network, cutting traditional cloud costs by 80% while maximizing decentralization.
+### Why Nosana?
+By leveraging Nosana’s decentralized inference endpoints for **Qwen3.5-27B** and **Qwen3-Embedding**, the Wallet Oracle avoids the vendor lock-in and high costs of centralized AI providers. The entire agent stack is containerized and deployed on the Nosana grid, showcasing the future of sovereign, personal AI that lives and breathes on decentralized compute infrastructure.
 
 ---
 
 ## ✨ Features
 
-- 🕵️‍♂️ **Wallet Profile Assessor:** Custom ElizaOS `ANALYZE_WALLET` plugin action that parses Base58 addresses and determines your on-chain archetype.
-- 🎓 **Roast & Educate Engine:** The AI doesn't just mock your trades—it analyzes your profile and pivots to deliver highly contextual, actionable DeFi education (e.g., risk management for degens, or advanced portfolio hedging for whales).
-- 🎨 **GPU-Accelerated Meme Gen:** Custom `GENERATE_MEME` action that creates dynamic visual memes using heavy inference logic.
-- 🤖 **ElizaOS Native:** Fully leverages the modular plugin and character JSON system of ElizaOS v2.
-- 🚀 **Nosana Ready:** Ships with specialized `.env` templates, `nosana_eliza_job_definition.json`, and an optimized `Dockerfile.nosana`.
+- 🕵️‍♂️ **Archetype Analysis:** Sarcastic persona designed for the Solana community.
+- 🎓 **DeFi Literacy:** Bridges the gap between meme culture and serious trading education.
+- 🚀 **Nosana Native:** Fully integrated with Nosana's Qwen3.5-27B-AWQ-4bit hosted inference.
+- 🤖 **ElizaOS v2 Framework:** Built using the latest state-of-the-art agentic framework.
 
 ---
 
-## 🛠️ Quick Start (Local Run)
+## 🛠️ Quick Start
 
-Want to see the Oracle in action before deploying to the grid?
-
+### Local Development
 ```bash
-# 1. Clone the repository
+# Clone and Install
 git clone https://github.com/tprk33271/nosana-wallet-oracle.git
 cd nosana-wallet-oracle
+pnpm install
 
-# 2. Install Dependencies (Uses Bun/pnpm)
-npm install
-
-# 3. Setup your Environment variables
+# Configure
 cp .env.example .env
+# Fill in your Nosana Endpoint details in .env
 
-# 4. Boot up the Agent
-npm run start
+# Run
+pnpm start
 ```
 
-Once running, type: `Hey, can you evaluate my Solana wallet Gv8SdqH6XyF7p89zL2kM1nP3q4R5s6t7u8v9w...?`
-
----
-
-## 🌐 Deploying to Nosana Grid
-
-Our agent is strictly built to run on decentralized infrastructure. 
-
+### Deployment on Nosana
 ```bash
-# Deploy using Nosana CLI
-nosana job post \
-  --file ./nos_job_def/nosana_eliza_job_definition.json \
-  --market nvidia-4090 \
-  --timeout 300 \
-  --api <YOUR_API_KEY>
+# Build and Push
+docker build -t your-username/nosana-eliza-agent:latest .
+docker push your-username/nosana-eliza-agent:latest
+
+# Deploy Job
+nosana job post --file nos_job_def/nosana_eliza_job_definition.json --market nvidia-3090 --api <YOUR_API_KEY>
 ```
 
 ---
 
-## 🧠 Project Architecture
+## 🧠 Project Structure
+- `characters/agent.character.json`: The Wallet Oracle persona and model configuration.
+- `nos_job_def/nosana_eliza_job_definition.json`: Official Nosana job configuration.
+- `Dockerfile`: Optimized container build following the official challenge template.
 
-All custom logic resides under `/src`:
-- **`src/index.ts`**: Contains our custom Degen Plugin featuring `ANALYZE_WALLET` and `GENERATE_MEME` actions.
-- **`characters/agent.character.json`**: The persona definition of the "Wallet Oracle", instructing it to be sarcastic, meme-fluent, and aggressively humorous about bad trades.
-- **`Dockerfile.nosana`**: Hardware-aware dockerfile intended for Nosana nodes.
+---
+
+## ✅ Submission Checklist
+- [x] Forked repository
+- [x] Deployed on Nosana (URL: [YOUR_URL_HERE])
+- [x] Starred required Nosana repositories
+- [x] Social media post shared
+- [x] Video demo recorded (<1 min)
 
 ---
 <div align="center">
-  <i>Built with ElizaOS · Deployed on Nosana · Built for Hackathon Glory</i>
+  <i>Built with ElizaOS · Deployed on Nosana · 2026</i>
 </div>
