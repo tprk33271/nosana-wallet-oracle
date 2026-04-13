@@ -23,7 +23,9 @@ ENV DO_NOT_TRACK=1
 WORKDIR /app
 
 # Copy package manifest and install dependencies
+# We need to copy src/ because package.json has a file: dependency to it
 COPY package.json ./
+COPY src/ ./src/
 RUN pnpm install
 
 # Copy all source files
